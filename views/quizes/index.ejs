@@ -1,6 +1,7 @@
 <table>
 <% var i; for (i=0; i<quizes.length; i++){ %>
   <tr>
+    <td class="icon-<%= quizes[i].tematica %>"></td>
     <td><a href="quizes/<%= quizes[i].id%>"><%= quizes[i].pregunta %></a></td>
     <td><a href="quizes/<%= quizes[i].id%>/edit"><button>editar</button></a></td>
     <td>
@@ -19,3 +20,12 @@
     <input type="submit" value="Enviar"/>
 </form>
 <a href="/quizes/new"><button type="button"> Crear pregunta </button></a>
+<div id="leyenda">
+  <ul>
+    <li class='icon-ciencia'>Ciencia</li>
+    <li class='icon-humanidades'>Humanidades</li>
+    <li class='icon-ocio'>Ocio</li>
+    <li class='icon-otro'>Otro</li>
+    <li class='icon-tecnologia'>Tecnología</li>
+  </ul>
+</div>

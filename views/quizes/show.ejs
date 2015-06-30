@@ -1,19 +1,47 @@
-<form method="get" action="/quizes/<%= quiz.id %>/answer">
-    <p>Pregunta: <%= quiz.pregunta %></p>
-    <input type="text" name = "respuesta" value ="Responda aquí"/>
-    <input type="submit" value="Enviar"/>
+<div class="row">
+<form role="form" method="get" action="/quizes/<%= quiz.id %>/answer">
+    <h4>Pregunta:</h4>
+    <h4>¿<%= quiz.pregunta %>?</h4>
+    <input type="text" class="form-control"  name = "respuesta" placeholder ="Responda aquí"/>
+    <button type="submit" class="btn btn-default" >Enviar</button>
 </form>
-<p><a href="/quizes/<%= quiz.id%>/comments/new"><button>Nuevo comentario</button></a></p>
+</div>
 
-<p><strong>Comentarios:</strong></p>
-<% for(index in quiz.Comments) { %>
-  <%if(quiz.Comments[index].publicado || session.user) {%>
-    <p>-<%=quiz.Comments[index].texto%>
-    <%if(session.user && !quiz.Comments[index].publicado) {%>
-      <a href="/quizes/<%= quiz.id%>/comments/<%=quiz.Comments[index].id%>/publish">
-      <button>Publicar</button>
-      </a>
-    <%}%>
-    </p>
-  <%}%>
-<%}%>
+<div class="row" >
+  <div class="col-md-8">
+    <div class="page-header">
+      <h3><small class="pull-right"><%=quiz.Comments.length%> comments</small> Comentarios </h3>
+      <div class="input-group" id="comments">
+        <form method="post" action="/quizes/<%=quiz.id%>/comments/">
+          <input type="text" id=comment name="comment[texto]"
+          class="form-control input-sm chat-input" placeholder="Escribe aquí tu comentario..." />
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-primary btn-sm" >
+            <span class="glyphicon glyphicon-comment"></span> Nuevo comentario
+          </button>
+          </span>
+        </form>
+    </div>
+    </div>
+    <div class="comments-list">
+
+      <% for(index in quiz.Comments) { %>
+        <%if(quiz.Comments[index].publicado || session.user) {%>
+          <div class="media">
+            <p class="pull-right"><small><%=quiz.Comments[index].createdAt%>Hace <%=new Date().getTime()-quiz.Comments[index].createdAt%> días</small></p>
+            <a class="media-left" href="#"><img src="/images/avatar.png"></a>
+          <div class="media-body">
+          <h4 class="media-heading user_name">Anónimo</h4>
+            <%=quiz.Comments[index].texto%>
+            <%if(session.user && !quiz.Comments[index].publicado) {%>
+              <a href="/quizes/<%= quiz.id%>/comments/<%=quiz.Comments[index].id%>/publish">
+              <button>Publicar</button>
+              </a>
+            <%}%>
+          </div>
+        </div>
+        <%}%>
+      <%}%>
+    </div>
+  </div>
+</div>

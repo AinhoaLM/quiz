@@ -1,0 +1,38 @@
+body {
+       padding-top: 70px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+ }
+
+.page-header {
+   margin-top: 0px;
+}
+
+footer , footer .nav > li > a:hover {
+	background-color: #222;
+	color: #9D9D9D;
+}
+
+footer a {
+	color: #9D9D9D;
+}
+
+#search{
+	margin-bottom:10px;
+}
+
+#leyenda{
+	margin-top:10px;
+}
+
+#f1{
+	margin-top:10px;
+}
+
+
+
+.icon-ciencia:before{content:"\e200"}
+.icon-humanidades:before{content:"\e135"}
+.icon-ocio:before{content:"\e001"}
+.icon-otro:before{content:"\e122"}
+.icon-tecnologia:before{content:"\e218"}
+

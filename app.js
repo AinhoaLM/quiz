@@ -16,6 +16,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// Instalación de los MW
 app.use(partials());
 
 // uncomment after placing your favicon in /public
@@ -35,8 +36,31 @@ app.use(function(req, res, next) {
     req.session.redir = req.path;
   }
   //Hacer visible req.session en las vistas
-  res.locals.session = req. session;
+  //app.locals y res.locals para definir variables locales en MWs.
+  //app.locals es visible en todo app y res.locals solo es visible en res en el mismo middleware
+  res.locals.session = req.session;
   next();
+});
+
+//Autologout (módulo 9)
+app.use(function(req, res, next){
+    var timeout = 15 * 1000; //Dos minutos (120 segundos)
+    if(req.session.user){
+        // Petición autenticada
+        var now = new Date().getTime();
+        var lastVisit = req.session.user.lastVisit || now;
+
+        if (now - lastVisit > timeout){
+            // Sesión caducada
+            delete req.session.user;
+            var err = new Error('La sesión ha caducado');
+            err.status = 419;
+            next(err);
+        }else{
+            req.session.user.lastVisit = now;
+        }
+    }
+    next();
 });
 
 app.use('/', routes);
@@ -70,7 +94,7 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
-        error: {},
+        error: err,
         errors: []
     });
 });

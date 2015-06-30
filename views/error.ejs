@@ -1,3 +1,9 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<% if (error.status===419) { %>
+    <div class="alert alert-warning">
+        <strong>Warning!</strong> <%= message %>
+    </div>
+<%} else {%>
+    <h1><%= message %></h1>
+    <h2><%= error.status %></h2>
+    <pre><%= error.stack %></pre>
+<% } %>

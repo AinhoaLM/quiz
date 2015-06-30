@@ -1,49 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Layout</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet'
-        type='text/css'
-        media='only screen and (min-width: 530px) and (min-device-width: 481px)'
-        href='/stylesheets/wide.css' />
-    <link rel='stylesheet'
-        type='text/css'
-        media='only screen and (max-width: 480px)'
-        href='/stylesheets/smartphone.css' />
-  </head>
-  <body>
-    <div id="page-wrap">
-      <header class="main" id="h1">
-        <%if(!session.user) {%>
-          <span class ="right"><a href="/login">Login</a></span>
-        <%} else {%>
-          <span class ="right"><%=session.user.username%><a href="/logout">Logout</a></span>
-        <%}%>
-        <h2>Quiz: el juego de las preguntas</h2>
-      </header>
-      <nav class="main" id="n1" role="navigation">
-        <span><a href="/">Inicio</a></span>
-        <span><a href="/quizes">Preguntas</a></span>
-        <span><a href=" /author">Créditos</a></span>
-      </nav>
-      <section class="main" id="s1">
-        <% if (errors.length) { %>
-          <span id='ErrorMsgs'>
-            Correguir errores:<br/>
-            <% for (var i in errors){ %>
-              <span> <%= errors[i].message %> </span><br/>
-              <% } %>
-          </span>
-        <% } %>
 
-        <div><%- body %> </div>
-      </section>
-      <footer class="main" id="f1">
-        <a target="_blank" href="http://es.wikipedia.org/wiki/Quiz"> ¿Qué es un Quiz?</a>
-        <a target="_blank" href="https://github.com/AinhoaLM/quiz"> Mi proyecto en GITHUB</a>
-      </footer>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Quiz</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+
+  <!-- Custom CSS -->
+  <link href="/stylesheets/custom.css" rel="stylesheet">
+
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Quiz</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="/">Inicio</a>
+          </li>
+          <li>
+            <a href="/quizes">Preguntas</a>
+          </li>
+          <li>
+            <a href="/author">Créditos</a>
+          </li>
+          <li>
+            <a href="/quizes/statistics">Estadísticas</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
     </div>
-  </body>
-</html>
+    <!-- /.container -->
+  </nav>
+  <header class="page-header container " id="h1">
+    <div class="row">
+      <div class="col-xs-8">
+        <h1>Quiz: <small>El juego de las preguntas</small></h1>
+      </div>
+      <div class="col-xs-4 text-right">
+        <%if(!session.user) {%>
+          <span class ="glyphicon glyphicon-user"><a href="/login">Login</a></span>
+          <%} else {%>
+            <span class ="glyphicon glyphicon-user"><%=session.user.username%><a href="/logout">Logout</a></span>
+            <%}%>
+          </div>
+        </div>
+      </header>
+      <!-- Page Content -->
+      <section class="container">
+        <div class="row" id="err1">
+          <% if (errors.length) { %>
+            <div class="col-xs-12 text-center alert alert-danger fade in">
+              <a href="#" class="close" data-dismiss="alert">&times;</a>
+              <span id='ErrorMsgs'>Correguir errores:<br/>
+                <% for (var i in errors){ %>
+                  <span> <%= errors[i].message %> </span><br/>
+                  <% } %>
+                </span>
+                <% } %>
+              </div>
+            </div>
+            <!--<div class="row">-->
+            <!--<div class="col-lg-12 text-center">-->
+            <%- body %>
+            <!--</div>-->
+            <!--</div>-->
+            <!-- /.row -->
+          </section>
+          <footer  id="f1" class="container-fluid">
+            <ul class="nav nav-justified">
+              <li><a target="_blank" href="http://es.wikipedia.org/wiki/Quiz"> ¿Qué es un Quiz?</a></li>
+              <li><a target="_blank" href="https://github.com/AinhoaLM/quiz"> Mi proyecto en GITHUB</a></li>
+            </ul>
+          </footer>
+          <!-- /.container -->
+
+          <!-- jQuery Version 1.11.1 -->
+          <script src="/javascripts/jquery.js"></script>
+
+          <!-- Bootstrap Core JavaScript -->
+          <script src="/javascripts/bootstrap.min.js"></script>
+
+        </body>
+
+        </html>

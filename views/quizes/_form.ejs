@@ -1,16 +1,21 @@
-<label for="tema" class="rem">Tematica</label>
-<select id="tema" name="quiz[tematica]">
+<div class="form-group">
+<label for="tema" >Tematica</label>
+<select class="form-control" id="tema" name="quiz[tematica]">
   <option value="otro"  <%=(quiz.tematica == 'otro')?'selected':''%>>Otro</option>
   <option value="humanidades" <% if (quiz.tematica == 'humanidades') { %>selected<% } %>>Humanidades</option>
   <option value="ocio" <% if (quiz.tematica == 'ocio') { %>selected<% } %> >Ocio</option>
   <option value="ciencia" <% if (quiz.tematica == 'ciencia') { %>selected<% } %> >Ciencia</option>
   <option value="tecnologia" <% if (quiz.tematica == 'tecnologia') { %>selected<% } %>>Tecnología</option>
 </select>
+</div>
 
-
-<label for="preg" class="rem">Pregunta</label>
-<input type="text" id="preg" name="quiz[pregunta]" value="<%= quiz.pregunta %>" placeholder="Pregunta"/>
-<label for="resp" class="rem">Respuesta</label>
-<input type="text" id="resp" name="quiz[respuesta]" value="<%= quiz.respuesta %>" placeholder="Respuesta"/>
+<div class="form-group">
+<label for="preg" >Pregunta</label>
+<input type="text" class="form-control" id="preg" name="quiz[pregunta]" value="<%= quiz.pregunta %>" placeholder="Pregunta"/>
+</div>
+<div class="form-group">
+<label for="resp" >Respuesta</label>
+<input type="text" class="form-control" id="resp" name="quiz[respuesta]" value="<%= quiz.respuesta %>" placeholder="Respuesta"/>
+</div>
 <a href="/quizes"><button type="button">Cancelar</button></a>
 <input type="submit" value="Salvar"/>

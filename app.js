@@ -12,6 +12,7 @@ var routes = require('./routes/index');
 
 var app = express();
 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -39,6 +40,8 @@ app.use(function(req, res, next) {
   //app.locals y res.locals para definir variables locales en MWs.
   //app.locals es visible en todo app y res.locals solo es visible en res en el mismo middleware
   res.locals.session = req.session;
+  //Para el head de statdísticas
+  res.locals.isStatistics=false;
   next();
 });
 
@@ -53,9 +56,9 @@ app.use(function(req, res, next){
         if (now - lastVisit > timeout){
             // Sesión caducada
             delete req.session.user;
-            var err = new Error('La sesión ha caducado');
-            err.status = 419;
-            next(err);
+            //var err = new Error('La sesión ha caducado');
+            //err.status = 419;
+            //next(err);
         }else{
             req.session.user.lastVisit = now;
         }

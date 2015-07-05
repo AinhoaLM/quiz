@@ -25,6 +25,31 @@
   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
 
+  <% if(isStatistics) {%>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        // Create our data table.
+        data = new google.visualization.DataTable();
+        data.addColumn('string', 'Comentarios');
+        data.addColumn('number', '');
+        data.addRows([
+          ['Con Comentarios', <%=statistics.nQuizWithComments%>],
+          ['Sin Comentarios', <%=statistics.nQuestions-statistics.nQuizWithComments%>]
+        ]);
+
+
+        var options = {
+          title: 'Estadística comentarios'
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+    </script>
+    <%}%>
+
 </head>
 
 <body>
